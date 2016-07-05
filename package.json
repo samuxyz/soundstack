@@ -1,0 +1,16 @@
+{
+  "name": "soundcloud",
+  "version": "1.0.0",
+  "description": "Soundcloud alike app to show Filestack capabilities to transcode audio",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sam Zaza",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
+  }
+}

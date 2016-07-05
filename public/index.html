@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A soundcloud alike app to show Filestack capabilities to transcode audio">
+    <meta name="author" content="Samuele Zaza">
+    
+    <link rel="icon" href="https://assets.filestackapi.com/web/c3417dc/img/favicon.ico">
+    
+    <!-- CSS -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="./css/navbar-fixed-top.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+    
+    <title>Soundstack</title>
+  </head>
+  <body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Soundstack</a>
+        </div>
+        
+        </div>
+      </nav>
+      <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h1>Welcome to Soundstack</h1>
+          <p>Discover the music on the web or promote your own tracks, try our easy Filestack uploader!</p>
+          <p>
+            <a class="btn btn-lg btn-filestack" href="./add.html" role="button">Upload Now</a>
+          </p>
+        </div>
+        <!-- /container -->
+        <div class="row">
+          <div class="col-md-4">
+            <ul class="list-group">
+              <a href="#" class="list-group-item active"><span class="badge text-filestack">8</span>New</a>
+              <a href="#" class="list-group-item"><span class="badge">20</span>Pop</a>
+              <a href="#" class="list-group-item"><span class="badge">15</span>Techno</a>
+              <a href="#" class="list-group-item"><span class="badge">18</span>Rock</a>
+              <a href="#" class="list-group-item"><span class="badge">29</span>Hip-Hop</a>
+              <a href="#" class="list-group-item"><span class="badge">14</span>Funk</a>
+            </ul>
+          </div>
+          <div class="col-md-8 media-list">
+            
+            
+            
+          </div>
+        </div>
+      </div>
+     <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script>
+    function appendData(data) {
+      $(".badge.text-filestack").text(data.length);
+      songElements = ""
+      data.forEach(function(song, index){
+        var songElement =
+        '<div class="media">' +
+          '<div class="media-left media-middle">' +
+            '<a href="#">' +
+              '<img class="media-object thumbnail-cover" src="' + song.cover + '" alt="...">' +
+            '</a>' +
+          '</div>' +
+          '<div class="media-body">' +
+            '<h5 class="media-heading text-secondary">' + song.user + '</h5>' +
+            '<h4 class="media-heading">' + song.title + '</h4>' +
+            '<audio controls>' +
+              '<source src="' + song.url + '" type="audio/ogg">' +
+              'Your browser does not support the audio element.' +
+            '</audio>' +
+            '<div class="btn-group btn-group-xs btn-group-media" role="group" aria-label="media-stats">' +
+              '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-heart"></i> ' + song.favorite.toLocaleString() + '</button>' +
+              '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-retweet"></i> ' + song.repost.toLocaleString() + '</button>' +
+              '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-saved"></i> Add to Playlist</button>' +
+              '<button type="button" class="btn btn-default"><i class="glyphicon glyphicon-share"></i> Share</button>' +
+            '</div>' +
+            '<div class="btn-group-stats">' +
+                '<p class="text-secondary"><i class="glyphicon glyphicon-play"></i> ' + song.times + '</p>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+        songElements = songElements.concat(songElement);
+      });      
+      var parent = $(".media-list").parent();
+      var mediaList = $(".media-list").detach().append(songElements)
+      parent.append(mediaList);
+    }
+
+    $(document).ready(function(){
+      $.ajax(
+        {
+          url: "/soundstack",
+          method: "GET",
+          dataType: "json"
+        }
+      )
+      .done(appendData)
+      .fail(function(e){ console.log("ERROR: " + e)});
+    });
+    </script>  
+    </body>
+  </html>

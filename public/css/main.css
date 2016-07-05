@@ -1,0 +1,41 @@
+html, body, div {
+	font-family: 'Montserrat', sans-serif;
+}
+audio {
+	display:block;
+}
+.text-filestack {
+	color: #EE4632 !important;
+}
+.text-secondary {
+	color: #999;
+}
+.thumbnail-cover {
+	width: 120px;
+}
+.btn-group-media, .btn-group-stats {
+	margin-top:20px;
+}
+.btn-group-stats {
+	float:right;
+}
+.list-group-item.active,  .list-group-item.active:hover, .btn-filestack{
+	background-color: #EE4632;
+	border-color: #EE4632;
+}
+.btn-filestack, .btn-filestack:hover {
+	color: #FFF;
+}
+.btn-filestack:hover {
+	background-color: #db2812;
+}
+.navbar-inverse {
+	background-color: #283A46;
+    border-bottom-color: #8D98A0;
+}
+.navbar-brand {
+	color: #FFF !important;
+}
+.navbar-nav li a{
+	color:#BAC3C9 !important;
+}
